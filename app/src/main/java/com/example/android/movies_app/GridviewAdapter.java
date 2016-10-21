@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.android.movies_app.Models.MoviesList;
+
 /**
  * Created by samuel on 10/21/2016.
  */
@@ -14,10 +16,13 @@ public class GridviewAdapter extends  RecyclerView.Adapter<GridviewAdapter.ViewH
 
     private  final Activity myActivity;
     private final Integer[] gridElements ;
-    public GridviewAdapter(Activity myActivity, Integer[] gridElements)
+    private final MoviesList moviesListResult ;
+
+    public GridviewAdapter(Activity myActivity, Integer[] gridElements, MoviesList moviesListResult)
     {
         this.myActivity = myActivity;
         this.gridElements = gridElements;
+        this.moviesListResult = moviesListResult;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
