@@ -11,8 +11,8 @@ import java.util.List;
 
 public class MoviesList {
 
-      List <MovieContent> results =new ArrayList<MovieContent>();
-      int page ;
+     public List <MovieContent> results =new ArrayList<MovieContent>();
+      public int page ;
 
 
 }

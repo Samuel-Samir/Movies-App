@@ -1,6 +1,6 @@
+
 package com.example.android.movies_app;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -15,7 +15,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static com.example.android.movies_app.PopularFragment.moviesListResult;
 
 /**
  * Created by samuel on 10/21/2016.
@@ -96,11 +95,11 @@ public class FetchMovies extends AsyncTask <String ,Void,MoviesList> {
 
     @Override
     protected void onPostExecute(MoviesList moviesList) {
-        moviesListResult = moviesList ;
 
-      /*  if (fetchMoviesCallback !=null)
+       if (fetchMoviesCallback !=null)
         {
             fetchMoviesCallback.onPostExecute(moviesList);
-        }*/
+        }
     }
 }
+

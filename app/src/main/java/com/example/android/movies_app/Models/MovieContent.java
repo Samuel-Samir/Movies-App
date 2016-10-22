@@ -5,18 +5,18 @@ package com.example.android.movies_app.Models;
  */
 
 public class MovieContent {
-    String poster_path ;
-    boolean adult ;
-    String overview;
-    String release_date ;
-    long [] genre_ids ;
-    long id ;
-    String original_title;
-    String original_language;
-    String title;
-    String backdrop_path;
-    double popularity ;
-    long vote_count ;
-    boolean video;
-    double vote_average ;
+    public  String poster_path ;
+    public boolean adult ;
+    public String overview;
+    public String release_date ;
+    public long [] genre_ids ;
+    public long id ;
+    public String original_title;
+    public String original_language;
+    public String title;
+    public String backdrop_path;
+    public double popularity ;
+    public long vote_count ;
+    public boolean video;
+    public double vote_average ;
 }

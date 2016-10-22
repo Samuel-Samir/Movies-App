@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.android.movies_app.Models.MoviesList;
+import com.squareup.picasso.Picasso;
+
 
 /**
  * Created by samuel on 10/21/2016.
@@ -15,13 +17,11 @@ import com.example.android.movies_app.Models.MoviesList;
 public class GridviewAdapter extends  RecyclerView.Adapter<GridviewAdapter.ViewHolder> {
 
     private  final Activity myActivity;
-    private final Integer[] gridElements ;
-    private final MoviesList moviesListResult ;
+    private  MoviesList moviesListResult =new MoviesList();
 
-    public GridviewAdapter(Activity myActivity, Integer[] gridElements, MoviesList moviesListResult)
+    public GridviewAdapter(Activity myActivity, MoviesList moviesListResult)
     {
         this.myActivity = myActivity;
-        this.gridElements = gridElements;
         this.moviesListResult = moviesListResult;
     }
     @Override
@@ -32,12 +32,14 @@ public class GridviewAdapter extends  RecyclerView.Adapter<GridviewAdapter.ViewH
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.imageView.setImageResource(gridElements[position]);
+        String baseimagUrl ="http://image.tmdb.org/t/p/w342/";
+        String imagUrl = moviesListResult.results.get(position).poster_path;
+        Picasso.with(myActivity).load(baseimagUrl+imagUrl).into( holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return gridElements.length;
+        return moviesListResult.results.size();
     }
 //******************************************************************************************//
     public class ViewHolder extends RecyclerView.ViewHolder
