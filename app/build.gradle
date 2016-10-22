@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -20,6 +21,7 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'OPEN_WEATHER_MAP_API_KEY', "\"c8732cd2368db4d409b3d97274d27600\""
     }
+
 
 }
 
@@ -35,5 +37,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.android.support:support-vector-drawable:24.2.1'
     testCompile 'junit:junit:4.12'
 }

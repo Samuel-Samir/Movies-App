@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Movies</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="sortingOrderKey" translatable="false">sorting_order</string>
+    <string name="sortingOrderdefault" translatable="false">popular</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

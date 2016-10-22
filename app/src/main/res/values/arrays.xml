@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="pref_units_options">
+        <item>Popular</item>
+        <item>Top rated</item>
+        <item>Favorit</item>
+    </string-array>
+
+    <string-array name="pref_units_values">
+        <item>popular</item>
+        <item>top_rated</item>
+        <item>favorit</item>
+    </string-array>
+</resources>

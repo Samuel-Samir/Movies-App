@@ -1,13 +1,17 @@
 package com.example.android.movies_app.Fragments;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.android.movies_app.FetchMovies;
 import com.example.android.movies_app.GridviewAdapter;
@@ -38,6 +42,8 @@ public class PopularFragment extends Fragment {
 
     public void fetchData ()
     {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String order =  sharedPreferences.getString(getActivity().getString(R.string.sortingOrderKey),getActivity().getString(R.string.sortingOrderdefault) );
 
         FetchMovies fetchMovies = new FetchMovies();
         fetchMovies.setFetchMoviesCallback(new FetchMovies.FetchMoviesCallback()
@@ -51,7 +57,14 @@ public class PopularFragment extends Fragment {
             }
 
         );
-        fetchMovies.execute("popular");
+        fetchMovies.execute(order);
+
+        Log.e("aaaa" ,order);
     }
 
 }
+/*
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getString(context.getString(R.string.pref_location_key),
+                context.getString(R.string.pref_location_default));
+ */
