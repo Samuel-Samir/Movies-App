@@ -3,6 +3,8 @@ package com.example.android.movies_app;
 
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.android.movies_app.Models.MoviesList;
@@ -101,5 +103,6 @@ public class FetchMovies extends AsyncTask <String ,Void,MoviesList> {
             fetchMoviesCallback.onPostExecute(moviesList);
         }
     }
+
 }
 
