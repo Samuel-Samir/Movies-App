@@ -57,9 +57,8 @@ public class PopularFragment extends Fragment {
             }
 
         );
-        fetchMovies.execute(order);
+        fetchMovies.execute(order , "movie");
 
-        Log.e("aaaa" ,order);
     }
 
 }

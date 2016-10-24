@@ -26,6 +26,7 @@ public class FetchMovies extends AsyncTask <String ,Void,MoviesList> {
 
     private final String LOG_TAG = FetchMovies.class.getName();
 
+//////////////////////////////////////////////////////////////////////////
 
     public interface FetchMoviesCallback
     {
@@ -35,6 +36,14 @@ public class FetchMovies extends AsyncTask <String ,Void,MoviesList> {
     public  void setFetchMoviesCallback (FetchMoviesCallback fetchMoviesCallback)
     {
         this.fetchMoviesCallback =fetchMoviesCallback;
+    }
+    //////////////////////////////////////////////////////////////////////////
+    public MoviesList movieParse (String jsonString)
+    {
+        MoviesList moviesList;
+        Gson gson = new Gson() ;
+        moviesList  = gson.fromJson(jsonString ,MoviesList.class);
+        return  moviesList;
     }
     @Override
     protected MoviesList doInBackground(String... params) {
@@ -73,13 +82,13 @@ public class FetchMovies extends AsyncTask <String ,Void,MoviesList> {
             if (buffer.length() == 0) {
                 return null;
             }
-            Gson gson = new Gson() ;
-            moviesList  = gson.fromJson(buffer.toString() ,MoviesList.class);
+            if (params[1].equals("movie"))
+                 moviesList  =movieParse(buffer.toString());
         }
         catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
         }
-         finally
+        finally
         {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -98,7 +107,7 @@ public class FetchMovies extends AsyncTask <String ,Void,MoviesList> {
     @Override
     protected void onPostExecute(MoviesList moviesList) {
 
-       if (fetchMoviesCallback !=null)
+        if (fetchMoviesCallback !=null)
         {
             fetchMoviesCallback.onPostExecute(moviesList);
         }
