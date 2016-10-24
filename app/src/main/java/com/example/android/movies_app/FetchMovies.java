@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.example.android.movies_app.Models.MovieReviews;
+import com.example.android.movies_app.Models.MovieReviewsList;
+import com.example.android.movies_app.Models.MovieVideoList;
 import com.example.android.movies_app.Models.MoviesList;
 import com.google.gson.Gson;
 
@@ -16,13 +19,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * Created by samuel on 10/21/2016.
  */
 
-public class FetchMovies extends AsyncTask <String ,Void,MoviesList> {
+public class FetchMovies extends AsyncTask <String ,Void,Object> {
 
     private final String LOG_TAG = FetchMovies.class.getName();
 
@@ -30,7 +35,7 @@ public class FetchMovies extends AsyncTask <String ,Void,MoviesList> {
 
     public interface FetchMoviesCallback
     {
-        public  void onPostExecute(MoviesList moviesList);
+        public  void onPostExecute(Object Object);
     }
     private  FetchMoviesCallback fetchMoviesCallback;
     public  void setFetchMoviesCallback (FetchMoviesCallback fetchMoviesCallback)
@@ -38,16 +43,37 @@ public class FetchMovies extends AsyncTask <String ,Void,MoviesList> {
         this.fetchMoviesCallback =fetchMoviesCallback;
     }
     //////////////////////////////////////////////////////////////////////////
-    public MoviesList movieParse (String jsonString)
+
+    public Object movieParse (String jsonString ,String parsingType)
     {
-        MoviesList moviesList;
+        MoviesList moviesList = new MoviesList();
+        MovieReviewsList movieReviewses = new MovieReviewsList() ;
+        MovieVideoList movieVideoList =new MovieVideoList();
         Gson gson = new Gson() ;
-        moviesList  = gson.fromJson(jsonString ,MoviesList.class);
-        return  moviesList;
+        if (parsingType.equals("movie"))
+        {
+            moviesList = gson.fromJson(jsonString, MoviesList.class);
+            return moviesList;
+        }
+        else if (parsingType.equals("reviews"))
+        {
+            movieReviewses = gson.fromJson(jsonString, MovieReviewsList.class);
+            return movieReviewses;
+        }
+
+        else if(parsingType.equals("videos"))
+        {
+            movieVideoList = gson.fromJson(jsonString, MovieVideoList.class);
+            return movieVideoList;
+        }
+
+    
+            return null;
+
     }
     @Override
-    protected MoviesList doInBackground(String... params) {
-        MoviesList moviesList = new MoviesList();
+    protected Object doInBackground(String... params) {
+        Object resultObject = new Object();
         if (params.length == 0) {
             return null;
         }
@@ -57,7 +83,7 @@ public class FetchMovies extends AsyncTask <String ,Void,MoviesList> {
             final String BASE_URL = "http://api.themoviedb.org/3/movie/";
             final String API_KEY = "api_key";
             Uri builtUri = Uri.parse(BASE_URL).buildUpon()
-                    .appendPath(params[0])
+                    .appendEncodedPath(params[0])
                     .appendQueryParameter(API_KEY, BuildConfig.OPEN_WEATHER_MAP_API_KEY)
                     .build();
 
@@ -82,8 +108,9 @@ public class FetchMovies extends AsyncTask <String ,Void,MoviesList> {
             if (buffer.length() == 0) {
                 return null;
             }
-            if (params[1].equals("movie"))
-                 moviesList  =movieParse(buffer.toString());
+            resultObject  =movieParse(buffer.toString() ,params[1]);
+
+
         }
         catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
@@ -101,15 +128,15 @@ public class FetchMovies extends AsyncTask <String ,Void,MoviesList> {
                 }
             }
         }
-        return moviesList;
+        return resultObject;
     }
 
     @Override
-    protected void onPostExecute(MoviesList moviesList) {
+    protected void onPostExecute(Object object) {
 
         if (fetchMoviesCallback !=null)
         {
-            fetchMoviesCallback.onPostExecute(moviesList);
+            fetchMoviesCallback.onPostExecute(object);
         }
     }
 

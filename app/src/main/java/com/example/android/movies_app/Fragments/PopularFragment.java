@@ -49,9 +49,10 @@ public class PopularFragment extends Fragment {
         fetchMovies.setFetchMoviesCallback(new FetchMovies.FetchMoviesCallback()
             {
                 @Override
-                public void onPostExecute(MoviesList moviesList)
+                public void onPostExecute(Object object)
                     {
-                        myAdapter =new GridviewAdapter(getActivity() , moviesList) ;
+                        MoviesList moviesList2 = (MoviesList) object ;
+                        myAdapter =new GridviewAdapter(getActivity() , moviesList2) ;
                         moviesGrid.setAdapter(myAdapter);
                     }
             }
@@ -62,8 +63,3 @@ public class PopularFragment extends Fragment {
     }
 
 }
-/*
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getString(context.getString(R.string.pref_location_key),
-                context.getString(R.string.pref_location_default));
- */
