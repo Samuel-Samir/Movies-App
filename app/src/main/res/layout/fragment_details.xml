@@ -14,7 +14,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:src="@drawable/po342"
         android:id="@+id/moviePoster"
@@ -44,6 +44,7 @@
             android:src="@drawable/im"
             android:id="@+id/moviePhoto"
             />
+
         <LinearLayout
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -58,23 +59,27 @@
                 android:id="@+id/date"
                 android:text="samuek"
                 android:layout_gravity="center"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="85dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/voters"
                 android:text="saasa"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:layout_gravity="center"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="add to favorit"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:background="#049e47"
+                android:textColor="#ffffff"
                 />
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_star_rate_black_18dp"
-                />
 
         </LinearLayout>
 
@@ -122,7 +127,7 @@
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:id="@+id/test"
+           android:text="Treails:"
            />
     <View
         android:layout_width="match_parent"
@@ -136,7 +141,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/test2"
+        android:text="reciews:"
         />
 </LinearLayout>
 </ScrollView>

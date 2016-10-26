@@ -36,8 +36,6 @@ public class DetailsFragment extends Fragment {
     TextView  votersTextView ;
     TextView  overviewTextView;
     RatingBar ratingBar;
-    TextView test ;
-    TextView test2 ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -54,8 +52,7 @@ public class DetailsFragment extends Fragment {
         votersTextView =(TextView) rootView.findViewById(R.id.voters);
         overviewTextView =(TextView) rootView.findViewById(R.id.overview);
         ratingBar = (RatingBar) rootView.findViewById(R.id.ratingBar);
-        test =(TextView) rootView.findViewById(R.id.test);
-        test2 =(TextView) rootView.findViewById(R.id.test2);
+
 
         // String f = movieReviewses.results.get(0).content;
 
@@ -92,7 +89,7 @@ public class DetailsFragment extends Fragment {
                     @Override
                     public void onPostExecute(Object object) {
                         movieReviewses = (MovieReviewsList) object ;
-                        test.setText(movieReviewses.results.get(0).content);
+                        //test.setText(movieReviewses.results.get(0).content);
                     }
                 }
         );
@@ -108,7 +105,7 @@ public class DetailsFragment extends Fragment {
                     @Override
                     public void onPostExecute(Object object) {
                         movieVideoList = (MovieVideoList) object ;
-                        test2.setText(movieVideoList.results.get(0).key);
+                       // test2.setText(movieVideoList.results.get(0).key);
                     }
                 }
         );
