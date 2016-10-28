@@ -5,145 +5,174 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.android.movies_app.Fragments.DetailsFragment"
-    >
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:src="@drawable/po342"
-        android:id="@+id/moviePoster"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:padding="8dp"
-        android:text="samue samir youssef"
-        android:textColor="#fff"
-        android:background="#B3000000"
-        android:id="@+id/movieName"
-        android:layout_below="@+id/moviePoster" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.example.android.movies_app.Fragments.DetailsFragment"
         >
+
         <ImageView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/im"
-            android:id="@+id/moviePhoto"
+            android:scaleType="fitXY"
+            android:id="@+id/moviePoster"
             />
-
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:textColor="#fff"
+            android:background="#B3000000"
+            android:id="@+id/movieName"
+            android:layout_below="@+id/moviePoster" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             >
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/moviePhoto"
+                />
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/date"
-                android:text="samuek"
-                android:layout_gravity="center"
-                android:layout_marginTop="85dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/voters"
-                android:text="saasa"
-                android:layout_marginTop="8dp"
-                android:layout_gravity="center"
-                />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="add to favorit"
-                android:layout_margin="8dp"
-                android:padding="8dp"
-                android:background="#049e47"
-                android:textColor="#ffffff"
-                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/date"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="85dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/voters"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="add to favorit"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    android:background="#049e47"
+                    android:textColor="#ffffff"
+                    />
+
+
+            </LinearLayout>
 
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="30dp"
+                android:text="Rating : "
 
+                />
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize=".1"
+                android:clickable="false"
+                android:contextClickable="false" />
+        </LinearLayout>
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/overview"
+            android:padding="4dp"
+
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textSize="30dp"
-            android:text="Rating : "
-
+            android:text="Treails:"
             />
-        <RatingBar
-            android:id="@+id/ratingBar"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numStars="5"
-            android:stepSize=".1"
-            android:clickable="false"
-            android:contextClickable="false" />
+            android:paddingLeft="32dp"
+            android:textSize="16dp"
+            android:text="Trailers Not Available"
+            android:id="@+id/trailersNotAvailable"
+            android:textStyle="bold"
+            />
+        <ExpandableListView
+            android:id="@+id/trailers_exp_list"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+            android:divider="#A4C739"
+            android:dividerHeight="0.5dp"
+            ></ExpandableListView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reviews:"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="32dp"
+            android:textSize="16dp"
+            android:text="Reviews  Not Available"
+            android:id="@+id/reviewsNotAvailable"
+            android:textStyle="bold"
+            />
+        <ExpandableListView
+            android:id="@+id/reviews_exp_list"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+            android:divider="#A4C739"
+            android:dividerHeight="0.5dp"
+            ></ExpandableListView>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/overview"
-        android:padding="4dp"
-
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginLeft="4dp"
-        />
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="Treails:"
-           />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginLeft="4dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="reciews:"
-        />
-</LinearLayout>
 </ScrollView>
 
 

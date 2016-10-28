@@ -39,7 +39,7 @@ public class GridviewAdapter extends  RecyclerView.Adapter<GridviewAdapter.ViewH
         final MovieContent movieContent =  moviesListResult.results.get(position) ;
         String baseimagUrl ="http://image.tmdb.org/t/p/w342/";
         String imagUrl = movieContent.poster_path;
-        Picasso.with(myActivity).load(baseimagUrl+imagUrl).into( holder.imageView);
+        Picasso.with(myActivity).load(baseimagUrl+imagUrl).placeholder(R.drawable.holder).into( holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 

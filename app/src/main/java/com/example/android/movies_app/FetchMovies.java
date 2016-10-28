@@ -1,11 +1,14 @@
 
 package com.example.android.movies_app;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.android.movies_app.Models.MovieReviews;
 import com.example.android.movies_app.Models.MovieReviewsList;
@@ -30,6 +33,7 @@ import java.util.List;
 public class FetchMovies extends AsyncTask <String ,Void,Object> {
 
     private final String LOG_TAG = FetchMovies.class.getName();
+
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -130,6 +134,13 @@ public class FetchMovies extends AsyncTask <String ,Void,Object> {
         }
         return resultObject;
     }
+
+    @Override
+    protected void onPreExecute(){
+
+    }
+
+
 
     @Override
     protected void onPostExecute(Object object) {
