@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         {
             getSupportFragmentManager().beginTransaction().add(R.id.container ,new PopularFragment()).commit() ;
         }
+        getSupportActionBar().setElevation(0f);
+
     }
 
     @Override

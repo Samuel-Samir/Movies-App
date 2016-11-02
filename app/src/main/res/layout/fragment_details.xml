@@ -25,7 +25,7 @@
             android:textStyle="bold"
             android:padding="8dp"
             android:textColor="#fff"
-            android:background="#B3000000"
+            android:background="#B3049e47"
             android:id="@+id/movieName"
             android:layout_below="@+id/moviePoster" />
         <LinearLayout
@@ -68,11 +68,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="add to favorit"
                     android:layout_margin="8dp"
                     android:padding="8dp"
-                    android:background="#049e47"
                     android:textColor="#ffffff"
+                    android:id="@+id/addToFavorit"
                     />
 
 
@@ -100,7 +99,10 @@
                 android:numStars="5"
                 android:stepSize=".1"
                 android:clickable="false"
-                android:contextClickable="false" />
+                android:focusableInTouchMode="false"
+                android:focusable="false"
+                android:isIndicator="true"
+                />
         </LinearLayout>
 
         <TextView
@@ -108,6 +110,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/overview"
             android:padding="4dp"
+
 
             />
         <View
@@ -136,11 +139,14 @@
         <ExpandableListView
             android:id="@+id/trailers_exp_list"
             android:layout_height="match_parent"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
             android:divider="#A4C739"
             android:dividerHeight="0.5dp"
+            android:nestedScrollingEnabled="true"
+
             ></ExpandableListView>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -163,6 +169,7 @@
             android:text="Reviews  Not Available"
             android:id="@+id/reviewsNotAvailable"
             android:textStyle="bold"
+
             />
         <ExpandableListView
             android:id="@+id/reviews_exp_list"
@@ -171,8 +178,11 @@
             android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
             android:divider="#A4C739"
             android:dividerHeight="0.5dp"
+            android:nestedScrollingEnabled="true"
+
             ></ExpandableListView>
     </LinearLayout>
 </ScrollView>
 
 
+    <!--    android:background="#B3000000" -->

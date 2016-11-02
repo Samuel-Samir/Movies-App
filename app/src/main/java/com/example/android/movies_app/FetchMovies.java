@@ -1,6 +1,7 @@
 
 package com.example.android.movies_app;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -33,6 +34,14 @@ import java.util.List;
 public class FetchMovies extends AsyncTask <String ,Void,Object> {
 
     private final String LOG_TAG = FetchMovies.class.getName();
+    private Activity activity ;
+    private ProgressDialog dialog ;
+
+    public  FetchMovies (Activity activity )
+    {
+        this.activity=activity;
+        dialog = new ProgressDialog(activity);
+    }
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -47,6 +56,10 @@ public class FetchMovies extends AsyncTask <String ,Void,Object> {
         this.fetchMoviesCallback =fetchMoviesCallback;
     }
     //////////////////////////////////////////////////////////////////////////
+
+
+
+
 
     public Object movieParse (String jsonString ,String parsingType)
     {
@@ -136,15 +149,21 @@ public class FetchMovies extends AsyncTask <String ,Void,Object> {
     }
 
     @Override
-    protected void onPreExecute(){
-
+    protected void onPreExecute() {
+        this.dialog.setMessage("loading...");
+        this.dialog.show();
+        super.onPreExecute();
     }
+
 
 
 
     @Override
     protected void onPostExecute(Object object) {
 
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
         if (fetchMoviesCallback !=null)
         {
             fetchMoviesCallback.onPostExecute(object);

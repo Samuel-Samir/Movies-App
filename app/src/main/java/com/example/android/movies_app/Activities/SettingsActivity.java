@@ -21,6 +21,7 @@ public class SettingsActivity   extends PreferenceActivity implements Preference
         addPreferencesFromResource(R.xml.sort_order);
         bindPreferenceSummaryToValue(findPreference(getString(R.string.sortingOrderKey)));
 
+
     }
 
     private void bindPreferenceSummaryToValue(Preference preference) {
