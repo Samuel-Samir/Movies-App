@@ -34,7 +34,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.1"
-        sha1="4e42e683d608ecb122bd2df804fb84d98b6f8ced">
+        sha1="e48bf8561bbbee6e99b0f47595cf802f72a24026">
         <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_d11b7c8a38b472682f127ff02d6ac243c627d959\classes.dex" />
     </item>
     <item
@@ -165,21 +165,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.1"
-        sha1="8041371f2f06d61991185a6447c3007fff6524b3">
-        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_4c66273334d64aae4c8240fccfb2f976196120ea\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\samuel\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.6.2\f1bc476cc167b18e66c297df599b2377131a8947\gson-2.6.2.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.1"
         sha1="f1bc476cc167b18e66c297df599b2377131a8947">
         <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.6.2_df62ebcec641086472f9361f70d6374e67fbe282\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="0ccc8d4f4e25436d744cb2a715486a9aa6f97905">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_4c66273334d64aae4c8240fccfb2f976196120ea\classes.dex" />
     </item>
 
 </items>

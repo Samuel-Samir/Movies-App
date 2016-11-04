@@ -90,6 +90,11 @@ public class FetchMovies extends AsyncTask <String ,Void,Object> {
     }
     @Override
     protected Object doInBackground(String... params) {
+        if (params[0].equals("favorit"))
+        {
+            MoviesList moviesList = new MoviesList() ;
+            return  moviesList ;
+        }
         Object resultObject = new Object();
         if (params.length == 0) {
             return null;

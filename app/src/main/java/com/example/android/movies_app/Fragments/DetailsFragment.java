@@ -27,6 +27,7 @@ import com.example.android.movies_app.Models.MovieContent;
 import com.example.android.movies_app.Models.MovieReviewsList;
 import com.example.android.movies_app.Models.MovieVideoList;
 import com.example.android.movies_app.R;
+import com.example.android.movies_app.Utilities;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -74,7 +75,10 @@ public class DetailsFragment extends Fragment {
         {
             findViews (rootView);
             setMovieContent() ;
-            fetchVideos ();
+            if (Utilities.checkInternetConnection(getActivity())) {
+                fetchVideos();
+            }
+            else Utilities.connectionAlart(getActivity());
         }
 
         return rootView ;
@@ -162,7 +166,7 @@ public class DetailsFragment extends Fragment {
                             trailers_exp_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                                 @Override
                                 public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                    setListViewHeight(parent, groupPosition);
+                                    Utilities.setListViewHeight(parent, groupPosition);
                                     return false;
                                 }
                             });
@@ -206,7 +210,7 @@ public class DetailsFragment extends Fragment {
                             reviews_exp_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                                 @Override
                                 public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                    setListViewHeight(parent, groupPosition);
+                                    Utilities.setListViewHeight(parent, groupPosition);
                                     return false;
                                 }
                             });
@@ -244,40 +248,6 @@ public class DetailsFragment extends Fragment {
         return shareIntent;
     }
 
-    private void setListViewHeight(ExpandableListView listView, int group) {
-        ExpandableListAdapter listAdapter = (ExpandableListAdapter) listView.getExpandableListAdapter();
-        int totalHeight = 0;
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
-                View.MeasureSpec.EXACTLY);
-        for (int i = 0; i < listAdapter.getGroupCount(); i++) {
-            View groupItem = listAdapter.getGroupView(i, false, null, listView);
-            groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-
-            totalHeight += groupItem.getMeasuredHeight();
-
-            if (((listView.isGroupExpanded(i)) && (i != group))
-                    || ((!listView.isGroupExpanded(i)) && (i == group))) {
-                for (int j = 0; j < listAdapter.getChildrenCount(i); j++) {
-                    View listItem = listAdapter.getChildView(i, j, false, null,
-                            listView);
-                    listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-
-                    totalHeight += listItem.getMeasuredHeight();
-
-                }
-            }
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        int height = totalHeight
-                + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
-        if (height < 10)
-            height = 200;
-        params.height = height;
-        listView.setLayoutParams(params);
-        listView.requestLayout();
-
-    }
 
 /*
     boolean checkInsertedInDatabase() {
