@@ -13,7 +13,6 @@ import com.example.android.movies_app.Models.MovieContent;
 import com.example.android.movies_app.Models.MoviesList;
 import com.example.android.movies_app.R;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Callback;
 
 
 
@@ -25,13 +24,11 @@ public class GridviewAdapter extends  RecyclerView.Adapter<GridviewAdapter.ViewH
 
     private  final Activity myActivity;
     private  MoviesList moviesListResult =new MoviesList();
-    private ProgressBar progressBar ;
 
-    public GridviewAdapter(Activity myActivity, MoviesList moviesListResult ,ProgressBar progressBar)
+    public GridviewAdapter(Activity myActivity, MoviesList moviesListResult )
     {
         this.myActivity = myActivity;
         this.moviesListResult = moviesListResult;
-        this.progressBar=progressBar ;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -44,20 +41,7 @@ public class GridviewAdapter extends  RecyclerView.Adapter<GridviewAdapter.ViewH
         final MovieContent movieContent =  moviesListResult.results.get(position) ;
         String baseimagUrl ="http://image.tmdb.org/t/p/w342/";
         String imagUrl = movieContent.poster_path;
-        Picasso.with(myActivity).load(baseimagUrl+imagUrl).placeholder(R.drawable.holder).into( holder.imageView,
-                new Callback() {
-            @Override
-            public void onSuccess() {
-                progressBar.setVisibility(View.GONE);
-            }
-
-                    @Override
-                    public void onError() {
-
-                    }
-                });
-
-
+        Picasso.with(myActivity).load(baseimagUrl+imagUrl).placeholder(R.drawable.holder).into( holder.imageView) ;
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 

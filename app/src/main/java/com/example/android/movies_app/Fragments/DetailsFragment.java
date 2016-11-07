@@ -20,12 +20,14 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.movies_app.Adapters.ExpandableListAdapter;
 import com.example.android.movies_app.FetchMovies;
 import com.example.android.movies_app.Models.MovieContent;
 import com.example.android.movies_app.Models.MovieReviewsList;
 import com.example.android.movies_app.Models.MovieVideoList;
+import com.example.android.movies_app.Models.MoviesList;
 import com.example.android.movies_app.R;
 import com.example.android.movies_app.Utilities;
 import com.squareup.picasso.Picasso;
@@ -46,6 +48,7 @@ public class DetailsFragment extends Fragment {
     private ExpandableListAdapter reviewsExpAdapter ;
     private List <String> expandableListKey  ;
     private HashMap <String ,String> expandableListHashMap  ;
+    MenuItem menuItem ;
 
     boolean ay7aga =true ;
 
@@ -71,14 +74,28 @@ public class DetailsFragment extends Fragment {
         View rootView=  inflater.inflate(R.layout.fragment_details, container, false);
         movieContent = (MovieContent) getActivity().getIntent().getSerializableExtra("myMovie");
         getActivity().setTitle("Movie Details");
-        if (movieContent!=null)
+        if (savedInstanceState==null)
         {
-            findViews (rootView);
-            setMovieContent() ;
-            if (Utilities.checkInternetConnection(getActivity())) {
-                fetchVideos();
+            if (movieContent != null) {
+                findViews(rootView);
+                setMovieContent();
+                if (Utilities.checkInternetConnection(getActivity())) {
+                    fetchVideos();
+                } else Utilities.connectionAlart(getActivity());
             }
-            else Utilities.connectionAlart(getActivity());
+        }
+        else if (savedInstanceState!=null)
+        {
+            movieReviewses = (MovieReviewsList)  savedInstanceState.getSerializable("movieReviewses");
+            movieVideoList = (MovieVideoList) savedInstanceState.getSerializable("movieVideoList") ;
+            findViews(rootView);
+            setMovieContent();
+            if (movieVideoList.results.size()!=0)
+                setTrailersExpList (movieVideoList);
+
+            if (movieReviewses.results.size()!=0)
+                setReviewsExpList (movieReviewses);
+
         }
 
         return rootView ;
@@ -107,6 +124,7 @@ public class DetailsFragment extends Fragment {
             addToFavoritButton.setText("Remove From Favorites");
             addToFavoritButton.setBackgroundColor(Color.parseColor("#fc2e40"));
 
+
         } else {
             addToFavoritButton.setText("Add To Favorites");
             addToFavoritButton.setBackgroundColor(Color.parseColor("#049e47"));
@@ -131,6 +149,7 @@ public class DetailsFragment extends Fragment {
                 if (!ay7aga) {
                     addToFavoritButton.setText("Remove From Favorites");
                     addToFavoritButton.setBackgroundColor(Color.parseColor("#fc2e40"));
+                    test () ;
 
                 } else {
                     addToFavoritButton.setText("Add To Favorites");
@@ -140,7 +159,35 @@ public class DetailsFragment extends Fragment {
             }
         });
     }
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("movieReviewses" , movieReviewses);
+        outState.putSerializable("movieVideoList" , movieVideoList);
 
+    }
+
+    public void setTrailersExpList (MovieVideoList movieVideoList2)
+    {
+            trailersNotAvailable.setVisibility(View.GONE);
+            expandableListKey = new ArrayList<String>();
+            expandableListHashMap = new HashMap<String, String>();
+            for (int i=0 ;i<movieVideoList2.results.size() ;i++)
+            {
+                expandableListHashMap.put(movieVideoList2.results.get(i).name ,movieVideoList2.results.get(i).key);
+                expandableListKey.add(movieVideoList2.results.get(i).name);
+            }
+
+            trailersExpAdapter = new ExpandableListAdapter(getActivity() ,expandableListHashMap ,expandableListKey ,true);
+            trailers_exp_list.setAdapter(trailersExpAdapter);
+            trailers_exp_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+                @Override
+                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                    Utilities.setListViewHeight(parent, groupPosition);
+                    return false;
+                }
+            });
+
+    }
     public void  fetchVideos ()
     {
         String url =String.valueOf(movieContent.id)+"/videos";
@@ -152,26 +199,7 @@ public class DetailsFragment extends Fragment {
                         movieVideoList = (MovieVideoList) object ;
                         if(movieVideoList.results.size()!=0)
                         {
-                            trailersNotAvailable.setVisibility(View.GONE);
-                            expandableListKey = new ArrayList<String>();
-                            expandableListHashMap = new HashMap<String, String>();
-                            for (int i=0 ;i<movieVideoList.results.size() ;i++)
-                            {
-                                expandableListHashMap.put(movieVideoList.results.get(i).name ,movieVideoList.results.get(i).key);
-                                expandableListKey.add(movieVideoList.results.get(i).name);
-                            }
-
-                            trailersExpAdapter = new ExpandableListAdapter(getActivity() ,expandableListHashMap ,expandableListKey ,true);
-                            trailers_exp_list.setAdapter(trailersExpAdapter);
-                            trailers_exp_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-                                @Override
-                                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                    Utilities.setListViewHeight(parent, groupPosition);
-                                    return false;
-                                }
-                            });
-
-
+                            setTrailersExpList (movieVideoList);
                         }
                        else
                          trailers_exp_list.setVisibility(View.GONE);
@@ -184,7 +212,27 @@ public class DetailsFragment extends Fragment {
     }
 
 
+    public void setReviewsExpList (MovieReviewsList movieReviewses2)
+    {
+        reviewsNotAvailable.setVisibility(View.GONE);
+        expandableListKey = new ArrayList<String>();
+        expandableListHashMap = new HashMap<String, String>();
+        for (int i =0 ;i<movieReviewses2.results.size() ;i++)
+        {
+            expandableListHashMap.put(movieReviewses2.results.get(i).author ,movieReviewses2.results.get(i).content);
+            expandableListKey.add(movieReviewses2.results.get(i).author);
+        }
+        reviewsExpAdapter = new ExpandableListAdapter(getActivity() ,expandableListHashMap ,expandableListKey,false);
+        reviews_exp_list.setAdapter(reviewsExpAdapter);
+        reviews_exp_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                Utilities.setListViewHeight(parent, groupPosition);
+                return false;
+            }
+        });
 
+    }
 
     public void  fetchReviews ()
     {
@@ -197,23 +245,8 @@ public class DetailsFragment extends Fragment {
                         movieReviewses = (MovieReviewsList) object ;
                         if(movieReviewses.results.size()!=0)
                         {
-                            reviewsNotAvailable.setVisibility(View.GONE);
-                            expandableListKey = new ArrayList<String>();
-                            expandableListHashMap = new HashMap<String, String>();
-                            for (int i =0 ;i<movieReviewses.results.size() ;i++)
-                            {
-                                expandableListHashMap.put(movieReviewses.results.get(i).author ,movieReviewses.results.get(i).content);
-                                expandableListKey.add(movieReviewses.results.get(i).author);
-                            }
-                            reviewsExpAdapter = new ExpandableListAdapter(getActivity() ,expandableListHashMap ,expandableListKey,false);
-                            reviews_exp_list.setAdapter(reviewsExpAdapter);
-                            reviews_exp_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-                                @Override
-                                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                    Utilities.setListViewHeight(parent, groupPosition);
-                                    return false;
-                                }
-                            });
+                            setReviewsExpList (movieReviewses);
+                            setShareActionProvider ();
                         }
                         else
                             reviews_exp_list.setVisibility(View.GONE);
@@ -229,17 +262,19 @@ public class DetailsFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.share_menu, menu);
 
-        MenuItem menuItem = menu.findItem(R.id.action_share);
-
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-        mShareActionProvider.setShareIntent(createShareForecastIntent());
+         menuItem = menu.findItem(R.id.action_share);
 
     }
 
+    private void setShareActionProvider ()
+    {
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+        mShareActionProvider.setShareIntent(createShareForecastIntent());
+    }
     private Intent createShareForecastIntent() {
         String movieName = "Movie Name : " + movieContent.original_title  ;
-        //String key = movieVideoList.results.get(0).key;
-        String url = "https://www.youtube.com/watch?v="+ "eVSAZv4oqW8";
+        String key = movieVideoList.results.get(0).key;
+        String url = "https://www.youtube.com/watch?v="+ key;
         String sharedString = "#Movie_App \n"+movieName+"\nMovie Official Trailers : "+url+"\n" ;
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
@@ -248,6 +283,10 @@ public class DetailsFragment extends Fragment {
         return shareIntent;
     }
 
+    public  void  test ()
+    {
+        Toast.makeText(getActivity() , String.valueOf(movieReviewses.results.size() ) , Toast.LENGTH_SHORT).show();
+    }
 
 /*
     boolean checkInsertedInDatabase() {
