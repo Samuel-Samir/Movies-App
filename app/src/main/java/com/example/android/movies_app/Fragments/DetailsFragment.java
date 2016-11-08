@@ -27,7 +27,6 @@ import com.example.android.movies_app.FetchMovies;
 import com.example.android.movies_app.Models.MovieContent;
 import com.example.android.movies_app.Models.MovieReviewsList;
 import com.example.android.movies_app.Models.MovieVideoList;
-import com.example.android.movies_app.Models.MoviesList;
 import com.example.android.movies_app.R;
 import com.example.android.movies_app.Utilities;
 import com.squareup.picasso.Picasso;
@@ -48,7 +47,7 @@ public class DetailsFragment extends Fragment {
     private ExpandableListAdapter reviewsExpAdapter ;
     private List <String> expandableListKey  ;
     private HashMap <String ,String> expandableListHashMap  ;
-    MenuItem menuItem ;
+    private MenuItem menuItem ;
 
     boolean ay7aga =true ;
 
@@ -81,7 +80,8 @@ public class DetailsFragment extends Fragment {
                 setMovieContent();
                 if (Utilities.checkInternetConnection(getActivity())) {
                     fetchVideos();
-                } else Utilities.connectionAlart(getActivity());
+                } else
+                    Utilities.connectionAlart(getActivity());
             }
         }
         else if (savedInstanceState!=null)

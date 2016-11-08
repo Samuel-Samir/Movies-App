@@ -30,8 +30,10 @@ public class PopularFragment extends Fragment {
     private RecyclerView moviesGrid;
     private GridviewAdapter myAdapter ;
     private RelativeLayout relativeLayout ;
-    MoviesList moviesList = new MoviesList() ;
+    private MoviesList moviesList = new MoviesList() ;
     private  String order;
+    private static final int PICK_WIFI_REQUEST = 1;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,7 +45,6 @@ public class PopularFragment extends Fragment {
         getActivity().setTitle(Utilities.getOrderName(getActivity()));
         order =  Utilities.getOrder(getActivity());
         checkConnection() ;
-
         return  rootView ;
     }
 
@@ -117,7 +118,9 @@ public class PopularFragment extends Fragment {
                     .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            getActivity().startActivityForResult(new Intent(Settings.ACTION_WIFI_SETTINGS), 0);
+                            Intent openWifi = new Intent(Settings.ACTION_WIFI_SETTINGS) ;
+                            startActivityForResult(openWifi, PICK_WIFI_REQUEST);
+
                         }
                     })
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -137,7 +140,8 @@ public class PopularFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0) {
+
+        if (requestCode == PICK_WIFI_REQUEST) {
             checkConnection();
         }
     }
