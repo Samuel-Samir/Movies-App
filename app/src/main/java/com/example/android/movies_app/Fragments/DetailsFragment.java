@@ -1,10 +1,13 @@
 package com.example.android.movies_app.Fragments;
 
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -23,10 +26,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.movies_app.Adapters.ExpandableListAdapter;
+import com.example.android.movies_app.Adapters.GridviewAdapter;
+import com.example.android.movies_app.Database.MovieContract;
+import com.example.android.movies_app.FetchFromDataBase;
 import com.example.android.movies_app.FetchMovies;
 import com.example.android.movies_app.Models.MovieContent;
 import com.example.android.movies_app.Models.MovieReviewsList;
 import com.example.android.movies_app.Models.MovieVideoList;
+import com.example.android.movies_app.Models.MoviesList;
 import com.example.android.movies_app.R;
 import com.example.android.movies_app.Utilities;
 import com.squareup.picasso.Picasso;
@@ -75,6 +82,13 @@ public class DetailsFragment extends Fragment {
         getActivity().setTitle("Movie Details");
         if (savedInstanceState==null)
         {
+            if (Utilities.getOrder(getActivity()).equals("favorit"))
+            {
+                findViews(rootView);
+                setMovieContent();
+                fetchVideosFromDB ();
+            }
+            else
             if (movieContent != null) {
                 findViews(rootView);
                 setMovieContent();
@@ -84,6 +98,7 @@ public class DetailsFragment extends Fragment {
                     Utilities.connectionAlart(getActivity());
             }
         }
+
         else if (savedInstanceState!=null)
         {
             movieReviewses = (MovieReviewsList)  savedInstanceState.getSerializable("movieReviewses");
@@ -100,6 +115,7 @@ public class DetailsFragment extends Fragment {
 
         return rootView ;
     }
+
 
     public void findViews (View rootView)
     {
@@ -120,12 +136,13 @@ public class DetailsFragment extends Fragment {
 
     public void setMovieContent()
     {
-        if (!ay7aga) {
+
+        if (Utilities.checkInsertedInDatabase(getActivity() , movieContent.id))
+        {
             addToFavoritButton.setText("Remove From Favorites");
             addToFavoritButton.setBackgroundColor(Color.parseColor("#fc2e40"));
-
-
-        } else {
+        }
+        else{
             addToFavoritButton.setText("Add To Favorites");
             addToFavoritButton.setBackgroundColor(Color.parseColor("#049e47"));
         }
@@ -145,17 +162,7 @@ public class DetailsFragment extends Fragment {
         addToFavoritButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ay7aga =! ay7aga ;
-                if (!ay7aga) {
-                    addToFavoritButton.setText("Remove From Favorites");
-                    addToFavoritButton.setBackgroundColor(Color.parseColor("#fc2e40"));
-                    test () ;
-
-                } else {
-                    addToFavoritButton.setText("Add To Favorites");
-                    addToFavoritButton.setBackgroundColor(Color.parseColor("#049e47"));
-                }
-
+                onFavoriteClick ();
             }
         });
     }
@@ -168,24 +175,24 @@ public class DetailsFragment extends Fragment {
 
     public void setTrailersExpList (MovieVideoList movieVideoList2)
     {
-            trailersNotAvailable.setVisibility(View.GONE);
-            expandableListKey = new ArrayList<String>();
-            expandableListHashMap = new HashMap<String, String>();
-            for (int i=0 ;i<movieVideoList2.results.size() ;i++)
-            {
-                expandableListHashMap.put(movieVideoList2.results.get(i).name ,movieVideoList2.results.get(i).key);
-                expandableListKey.add(movieVideoList2.results.get(i).name);
-            }
+        trailersNotAvailable.setVisibility(View.GONE);
+        expandableListKey = new ArrayList<String>();
+        expandableListHashMap = new HashMap<String, String>();
+        for (int i=0 ;i<movieVideoList2.results.size() ;i++)
+        {
+            expandableListHashMap.put(movieVideoList2.results.get(i).name ,movieVideoList2.results.get(i).key);
+            expandableListKey.add(movieVideoList2.results.get(i).name);
+        }
 
-            trailersExpAdapter = new ExpandableListAdapter(getActivity() ,expandableListHashMap ,expandableListKey ,true);
-            trailers_exp_list.setAdapter(trailersExpAdapter);
-            trailers_exp_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-                @Override
-                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                    Utilities.setListViewHeight(parent, groupPosition);
-                    return false;
-                }
-            });
+        trailersExpAdapter = new ExpandableListAdapter(getActivity() ,expandableListHashMap ,expandableListKey ,true);
+        trailers_exp_list.setAdapter(trailersExpAdapter);
+        trailers_exp_list.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                Utilities.setListViewHeight(parent, groupPosition);
+                return false;
+            }
+        });
 
     }
     public void  fetchVideos ()
@@ -201,14 +208,55 @@ public class DetailsFragment extends Fragment {
                         {
                             setTrailersExpList (movieVideoList);
                         }
-                       else
-                         trailers_exp_list.setVisibility(View.GONE);
+                        else
+                            trailers_exp_list.setVisibility(View.GONE);
                         fetchReviews();
 
                     }
                 }
         );
         fetchMovies.execute(url , "videos");
+    }
+
+    private void fetchVideosFromDB() {
+
+        FetchFromDataBase fetchFromDataBase = new FetchFromDataBase(getActivity());
+        fetchFromDataBase.setFetchMoviesDBCallback(new FetchFromDataBase.FetchFromDBCallback() {
+            @Override
+            public void onPostExecute(Object Object) {
+
+                movieVideoList = (MovieVideoList) Object ;
+                if(movieVideoList.results.size()!=0)
+                {
+                    setTrailersExpList (movieVideoList);
+                }
+                else
+                    trailers_exp_list.setVisibility(View.GONE);
+                fetchReviewsFromDB ();
+
+            }
+        });
+        fetchFromDataBase.execute("videos" ,String.valueOf(movieContent.id ) ) ;
+    }
+
+    private void fetchReviewsFromDB() {
+        FetchFromDataBase fetchFromDataBase = new FetchFromDataBase(getActivity());
+        fetchFromDataBase.setFetchMoviesDBCallback(new FetchFromDataBase.FetchFromDBCallback() {
+            @Override
+            public void onPostExecute(Object Object) {
+
+                movieReviewses = (MovieReviewsList) Object ;
+                if(movieReviewses.results.size()!=0)
+                {
+                    setReviewsExpList (movieReviewses);
+                    setShareActionProvider ();
+                }
+                else
+                    reviews_exp_list.setVisibility(View.GONE);
+
+            }
+        });
+        fetchFromDataBase.execute("reviews" ,String.valueOf(movieContent.id ) ) ;
     }
 
 
@@ -262,7 +310,7 @@ public class DetailsFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.share_menu, menu);
 
-         menuItem = menu.findItem(R.id.action_share);
+        menuItem = menu.findItem(R.id.action_share);
 
     }
 
@@ -288,19 +336,6 @@ public class DetailsFragment extends Fragment {
         Toast.makeText(getActivity() , String.valueOf(movieReviewses.results.size() ) , Toast.LENGTH_SHORT).show();
     }
 
-/*
-    boolean checkInsertedInDatabase() {
-        Uri moviesWithIdUri = Uri.parse(MovieContract.MovieEntry.CONTENT_URI.toString());
-        Cursor movieListCursor = getActivity().getContentResolver().query(moviesWithIdUri, null, null, null, null);
-        int movieIdIndex = movieListCursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIE_ID);
-        while (movieListCursor.moveToNext()) {
-            int indexIterator = movieListCursor.getInt(movieIdIndex);
-            if (indexIterator == movieContent.id) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public void onFavoriteClick()
     {
@@ -346,8 +381,19 @@ public class DetailsFragment extends Fragment {
                 addToFavoritButton.setText("Remove From Favorites");
             }
         }
+        else {
+            int trailersDeleted = getActivity().getContentResolver().delete(MovieContract.TrailerEntry.CONTENT_URI ,
+                    MovieContract.TrailerEntry.COLUMN_MOVIE_ID +" = ? " ,new String[]{String.valueOf(movieContent.id)} );
+            int reviewDeleted =  getActivity().getContentResolver().delete(MovieContract.ReviewEntry.CONTENT_URI ,
+                    MovieContract.ReviewEntry.COLUMN_MOVIE_ID +" = ? " ,new String[]{String.valueOf(movieContent.id)} );
+            int moviesDeleted =getActivity().getContentResolver().delete(MovieContract.MovieEntry.CONTENT_URI ,
+                    MovieContract.MovieEntry.COLUMN_MOVIE_ID+" = ? ",new String[]{String.valueOf(movieContent.id)} );
+            if(moviesDeleted!=0){
+                addToFavoritButton.setText("Add To Favorites");
+            }
+        }
 
-    }*/
+    }
 
 
 }

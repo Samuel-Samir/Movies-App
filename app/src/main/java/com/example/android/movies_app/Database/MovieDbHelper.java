@@ -3,22 +3,28 @@ package com.example.android.movies_app.Database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 
 /**
  * Created by samuel on 10/25/2016.
  */
+
 public class MovieDbHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
 
     public static final String DATABASE_NAME = "movie.db";
+    Context context ;
     public MovieDbHelper(Context context){
         super(context , DATABASE_NAME , null , DATABASE_VERSION);
+        this.context = context ;
 
     }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
 
         final String SQL_CREATE_MOVIE_TABLE = "CREATE TABLE " + MovieContract.MovieEntry.TABLE_NAME + " ( "+
                 MovieContract.MovieEntry._ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
@@ -48,9 +54,18 @@ public class MovieDbHelper extends SQLiteOpenHelper {
                 MovieContract.ReviewEntry.COLUMN_CONTENT + " TEXT NOT NULL, "+
                 MovieContract.ReviewEntry.COLUMN_MOVIE_ID + " INTEGER NOT NULL);";
 
+
+
+        Log.e("sasa" , SQL_CREATE_MOVIE_TABLE);
+        Log.e("2 : " , SQL_CREATE_REVIEW_TABLE);
+        Log.e("3 : " , SQL_CREATE_TRAILER_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_REVIEW_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_TRAILER_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_MOVIE_TABLE);
+
+        Log.e("4 : " , String.valueOf(sqLiteDatabase.isOpen()));
+
+
 
     }
 

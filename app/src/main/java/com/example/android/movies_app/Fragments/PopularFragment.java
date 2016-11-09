@@ -12,12 +12,14 @@ import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.android.movies_app.FetchFromDataBase;
 import com.example.android.movies_app.FetchMovies;
 import com.example.android.movies_app.Adapters.GridviewAdapter;
 import com.example.android.movies_app.Models.MoviesList;
@@ -44,9 +46,16 @@ public class PopularFragment extends Fragment {
         moviesGrid = (RecyclerView) rootView.findViewById(R.id.GridViewLayout);
         getActivity().setTitle(Utilities.getOrderName(getActivity()));
         order =  Utilities.getOrder(getActivity());
-        checkConnection() ;
+        if (order.equals("favorit"))
+        {
+            fetchDataFromDB();
+        }
+        else
+            checkConnection() ;
         return  rootView ;
     }
+
+
 
     public void onOrientationChange(int orientation){
         if(orientation == Configuration.ORIENTATION_PORTRAIT){
@@ -67,32 +76,45 @@ public class PopularFragment extends Fragment {
 
     public void fetchData ( )
     {
+        FetchMovies fetchMovies = new FetchMovies(getActivity());
+        fetchMovies.setFetchMoviesCallback(new FetchMovies.FetchMoviesCallback() {
+                                               @Override
+                                               public void onPostExecute(Object object) {
+                                                   moviesList = (MoviesList) object;
+                                                   onOrientationChange(getResources().getConfiguration().orientation);
+                                                   myAdapter = new GridviewAdapter(getActivity(), moviesList);
+                                                   moviesGrid.setAdapter(myAdapter);
 
-      if (!order.equals("favorit")) {
-          FetchMovies fetchMovies = new FetchMovies(getActivity());
-          fetchMovies.setFetchMoviesCallback(new FetchMovies.FetchMoviesCallback() {
-                                                 @Override
-                                                 public void onPostExecute(Object object) {
-                                                     moviesList = (MoviesList) object;
-                                                     onOrientationChange(getResources().getConfiguration().orientation);
-                                                     myAdapter = new GridviewAdapter(getActivity(), moviesList);
-                                                     moviesGrid.setAdapter(myAdapter);
-                                                 }
-                                             }
 
-          );
-          fetchMovies.execute(order, "movie");
-      }
+                                               }
+                                           }
 
-        if (order.equals("favorit") && moviesList.results.size()==0)
-        {
-            Resources res = getResources();
-            Drawable drawable = res.getDrawable(R.drawable.nofav);
+        );
+        fetchMovies.execute(order, "movie");
 
-            relativeLayout.setBackground(drawable);
-        }
 
     }
+    public void fetchDataFromDB() {
+        FetchFromDataBase fetchFromDataBase = new FetchFromDataBase(getActivity());
+        fetchFromDataBase.setFetchMoviesDBCallback(new FetchFromDataBase.FetchFromDBCallback() {
+            @Override
+            public void onPostExecute(Object Object) {
+                moviesList = (MoviesList) Object;
+                onOrientationChange(getResources().getConfiguration().orientation);
+                myAdapter = new GridviewAdapter(getActivity(), moviesList);
+                moviesGrid.setAdapter(myAdapter);
+
+                if (moviesList.results.size()==0)
+                {
+                    Resources res = getResources();
+                    Drawable drawable = res.getDrawable(R.drawable.nofav);
+                    relativeLayout.setBackground(drawable);
+                }
+            }
+        });
+        fetchFromDataBase.execute("movie");
+    }
+
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -128,7 +150,7 @@ public class PopularFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             order= "favorit";
                             getActivity().setTitle("Favorit");
-                            fetchData();
+                            fetchDataFromDB();
 
                         }
                     })

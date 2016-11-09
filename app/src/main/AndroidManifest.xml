@@ -35,6 +35,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            <provider
+                android:authorities="com.example.android.movies_app"
+                android:name=".database.MovieProvider"/>
+
         </activity>
     </application>
 

@@ -2,11 +2,14 @@ package com.example.android.movies_app;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
 import com.example.android.movies_app.Adapters.ExpandableListAdapter;
+import com.example.android.movies_app.Database.MovieContract;
 
 /**
  * Created by samuel on 11/4/2016.
@@ -109,4 +113,24 @@ public class Utilities {
         listView.requestLayout();
 
     }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    public static boolean checkInsertedInDatabase( Activity activity  , int movieId)
+    {
+        // TODO
+       /* Uri moviesWithIdUri =Uri.parse(MovieContract.MovieEntry.CONTENT_URI.toString());
+        Cursor movieListCursor = activity.getContentResolver().query(moviesWithIdUri,null,null,null,null);
+        int movieIdIndex =movieListCursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIE_ID);
+        while(movieListCursor.moveToNext()){
+            int indexIterator = movieListCursor.getInt(movieIdIndex);
+            if(indexIterator == movieId){
+                return true;
+            }
+        }*/
+        return false;
+    }
+
+
+
+
 }

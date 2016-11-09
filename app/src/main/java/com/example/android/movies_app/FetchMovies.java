@@ -5,13 +5,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.ProgressBar;
 
-import com.example.android.movies_app.Models.MovieReviews;
 import com.example.android.movies_app.Models.MovieReviewsList;
 import com.example.android.movies_app.Models.MovieVideoList;
 import com.example.android.movies_app.Models.MoviesList;
@@ -23,8 +18,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 /**
@@ -55,7 +49,7 @@ public class FetchMovies extends AsyncTask <String ,Void,Object> {
     {
         this.fetchMoviesCallback =fetchMoviesCallback;
     }
-    //////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -83,22 +77,16 @@ public class FetchMovies extends AsyncTask <String ,Void,Object> {
             movieVideoList = gson.fromJson(jsonString, MovieVideoList.class);
             return movieVideoList;
         }
-
-    
             return null;
-
     }
     @Override
     protected Object doInBackground(String... params) {
-        if (params[0].equals("favorit"))
-        {
-            MoviesList moviesList = new MoviesList() ;
-            return  moviesList ;
-        }
+
         Object resultObject = new Object();
         if (params.length == 0) {
             return null;
         }
+
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         try {

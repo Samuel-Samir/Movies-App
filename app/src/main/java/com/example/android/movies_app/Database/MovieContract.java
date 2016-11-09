@@ -9,13 +9,14 @@ import android.provider.BaseColumns;
  */
 
 public class MovieContract {
-    public static final String CONTENT_AUTHORITY  = "movie.android.com.movieapp";
+    public static final String CONTENT_AUTHORITY  = "com.example.android.movies_app";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://"+CONTENT_AUTHORITY);
     public static final String PATH_MOVIE = "movie";
     public static final String PATH_REVIEW = "review";
     public static final String PATH_TRAILER = "trailer";
 
     public static final class MovieEntry implements BaseColumns{
+
         public static final String TABLE_NAME = "movie";
         public static final String COLUMN_MOVIE_ID="movie_id";
         public static final String COLUMN_TITLE="title";
@@ -35,6 +36,7 @@ public class MovieContract {
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_MOVIE).build();
     }
+
     public static final class TrailerEntry implements BaseColumns{
         public static final String TABLE_NAME = "trailer";
         public static final String COLUMN_KEY = "key";
@@ -48,6 +50,8 @@ public class MovieContract {
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_TRAILER).build();
     }
+
+
     public static final class ReviewEntry implements BaseColumns{
         public static final String TABLE_NAME = "review";
         public static final String COLUMN_AUTHOR = "author";
@@ -60,6 +64,7 @@ public class MovieContract {
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" +PATH_REVIEW;
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_REVIEW).build();
+
         public static Uri buildReviewWithMovie(int movieId){
             return CONTENT_URI.buildUpon().appendPath(String.valueOf(movieId)).build();
         }
