@@ -4,7 +4,9 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-
+/**
+ * Created by samuel on 10/25/2016.
+ */
 
 public class MovieContract {
     public static final String CONTENT_AUTHORITY  = "com.example.android.movies_app";
