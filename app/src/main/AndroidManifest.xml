@@ -5,6 +5,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <uses-permission
+        android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission
+        android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission
+        android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -25,6 +32,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.MainActivity" />
         </activity>
+
         <activity
             android:name=".Activities.MovieDetailsActivity"
             android:parentActivityName=".Activities.MainActivity" />
@@ -34,12 +42,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <provider
-                android:authorities="com.example.android.movies_app"
-                android:name=".database.MovieProvider"/>
-
         </activity>
+        <provider
+            android:authorities="com.example.android.movies_app"
+            android:name=".Database.MovieProvider"
+            android:exported="false"
+            android:syncable="true" />
     </application>
 
 </manifest>

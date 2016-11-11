@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.1"
-        sha1="a37e85ee7f9864bf82481909f070b99431bbecfa">
+        sha1="939823dee2cd745b807baa9c458733f28b56d4b4">
         <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_d11b7c8a38b472682f127ff02d6ac243c627d959\classes.dex" />
     </item>
     <item
@@ -178,7 +178,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.1"
-        sha1="15609e98b2dd0cb2b32dbf9fdfdf4c99634f7e7a">
+        sha1="bb66d7d39c29356d6f279891910fe791b9243900">
         <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_4c66273334d64aae4c8240fccfb2f976196120ea\classes.dex" />
     </item>
 

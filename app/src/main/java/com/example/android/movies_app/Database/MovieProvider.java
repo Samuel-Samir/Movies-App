@@ -26,16 +26,18 @@ public class MovieProvider extends ContentProvider {
     static final int REVIEW_WITH_MOVIEID = 301;
     public static final UriMatcher sUriMatcher = buildUriMatcher() ;
     MovieDbHelper mOpenHelper ;
+
     private static final SQLiteQueryBuilder sMovieWithReviewAndTrailer;
     static {
         sMovieWithReviewAndTrailer = new SQLiteQueryBuilder();
         sMovieWithReviewAndTrailer.setTables(MovieContract.MovieEntry.TABLE_NAME+
-        " INNER JOIN "+ MovieContract.ReviewEntry.TABLE_NAME +" ON "+ MovieContract.MovieEntry.TABLE_NAME+
-        "."+ MovieContract.MovieEntry.COLUMN_MOVIE_ID+" = "+ MovieContract.ReviewEntry.TABLE_NAME+"."+
+                " INNER JOIN "+ MovieContract.ReviewEntry.TABLE_NAME +" ON "+ MovieContract.MovieEntry.TABLE_NAME+
+                "."+ MovieContract.MovieEntry.COLUMN_MOVIE_ID+" = "+ MovieContract.ReviewEntry.TABLE_NAME+"."+
                 MovieContract.ReviewEntry.COLUMN_MOVIE_ID+" INNER JOIN "+ MovieContract.TrailerEntry.TABLE_NAME+
-        " ON "+ MovieContract.MovieEntry.TABLE_NAME+"."+ MovieContract.MovieEntry.COLUMN_MOVIE_ID+" = "+
+                " ON "+ MovieContract.MovieEntry.TABLE_NAME+"."+ MovieContract.MovieEntry.COLUMN_MOVIE_ID+" = "+
                 MovieContract.TrailerEntry.TABLE_NAME+"."+ MovieContract.TrailerEntry.COLUMN_MOVIE_ID);
     }
+
     private static final SQLiteQueryBuilder sMovieList;
     static {
         sMovieList = new SQLiteQueryBuilder();
@@ -100,7 +102,7 @@ public class MovieProvider extends ContentProvider {
                 null);
     }
     private Cursor getBasicMovieList(Uri uri , String[] projection , String sortOrder){
-       // String id = uri.getPathSegments().get(1);
+        // String id = uri.getPathSegments().get(1);
         String selectionArgs[];
         String selection;
         selection =null;
@@ -177,43 +179,43 @@ public class MovieProvider extends ContentProvider {
         Uri retUri = null;
         final int match =sUriMatcher.match(uri);
         try{
-        switch (match) {
-            case MOVIE: {
-                long _id = db.insert(MovieContract.MovieEntry.TABLE_NAME, null, contentValues);
-                if (_id > 0)
-                    retUri = ContentUris.withAppendedId(MovieContract.MovieEntry.CONTENT_URI, _id);
-                else
-                    throw new SQLiteConstraintException("Movie Already Exist");
-                break;
-            }
-            case TRAILER: {
-                long _id = db.insert(MovieContract.TrailerEntry.TABLE_NAME, null, contentValues);
-                if (_id > 0)
-                    retUri = ContentUris.withAppendedId(MovieContract.TrailerEntry.CONTENT_URI, _id);
-                else
-                    throw new android.database.SQLException("Failed to insert row into " + uri);
-                break;
-            }
-            case REVIEW: {
-                long _id = db.insert(MovieContract.ReviewEntry.TABLE_NAME, null, contentValues);
-                if (_id > 0)
-                    retUri = ContentUris.withAppendedId(MovieContract.ReviewEntry.CONTENT_URI, _id);
-                else
-                    throw new android.database.SQLException("Failed to insert row into " + uri);
-                break;
-            }
-            default:
-                throw new UnsupportedOperationException("Unknown uri: " + uri);
+            switch (match) {
+                case MOVIE: {
+                    long _id = db.insert(MovieContract.MovieEntry.TABLE_NAME, null, contentValues);
+                    if (_id > 0)
+                        retUri = ContentUris.withAppendedId(MovieContract.MovieEntry.CONTENT_URI, _id);
+                    else
+                        throw new SQLiteConstraintException("Movie Already Exist");
+                    break;
+                }
+                case TRAILER: {
+                    long _id = db.insert(MovieContract.TrailerEntry.TABLE_NAME, null, contentValues);
+                    if (_id > 0)
+                        retUri = ContentUris.withAppendedId(MovieContract.TrailerEntry.CONTENT_URI, _id);
+                    else
+                        throw new android.database.SQLException("Failed to insert row into " + uri);
+                    break;
+                }
+                case REVIEW: {
+                    long _id = db.insert(MovieContract.ReviewEntry.TABLE_NAME, null, contentValues);
+                    if (_id > 0)
+                        retUri = ContentUris.withAppendedId(MovieContract.ReviewEntry.CONTENT_URI, _id);
+                    else
+                        throw new android.database.SQLException("Failed to insert row into " + uri);
+                    break;
+                }
+                default:
+                    throw new UnsupportedOperationException("Unknown uri: " + uri);
 
-        }
-        getContext().getContentResolver().notifyChange(uri, null);
-        db.close();}
+            }
+            getContext().getContentResolver().notifyChange(uri, null);
+            db.close();}
         catch(SQLiteConstraintException e){
             Toast.makeText(getContext() , "Movie Already On Your Favorites List" , Toast.LENGTH_LONG);
 
         }
         return retUri;
-        }
+    }
 
     @Override
     public int delete(Uri uri, String selection, String[] strings) {

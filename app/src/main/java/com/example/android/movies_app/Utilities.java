@@ -117,8 +117,7 @@ public class Utilities {
     ////////////////////////////////////////////////////////////////////////////////
     public static boolean checkInsertedInDatabase( Activity activity  , int movieId)
     {
-        // TODO
-       /* Uri moviesWithIdUri =Uri.parse(MovieContract.MovieEntry.CONTENT_URI.toString());
+       Uri moviesWithIdUri =Uri.parse(MovieContract.MovieEntry.CONTENT_URI.toString());
         Cursor movieListCursor = activity.getContentResolver().query(moviesWithIdUri,null,null,null,null);
         int movieIdIndex =movieListCursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIE_ID);
         while(movieListCursor.moveToNext()){
@@ -126,7 +125,7 @@ public class Utilities {
             if(indexIterator == movieId){
                 return true;
             }
-        }*/
+        }
         return false;
     }
 

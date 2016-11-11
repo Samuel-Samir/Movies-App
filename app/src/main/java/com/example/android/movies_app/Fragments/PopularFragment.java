@@ -4,10 +4,12 @@ package com.example.android.movies_app.Fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -45,6 +47,7 @@ public class PopularFragment extends Fragment {
         relativeLayout = (RelativeLayout) rootView.findViewById(R.id.re);
         moviesGrid = (RecyclerView) rootView.findViewById(R.id.GridViewLayout);
         getActivity().setTitle(Utilities.getOrderName(getActivity()));
+
         order =  Utilities.getOrder(getActivity());
         if (order.equals("favorit"))
         {
@@ -112,7 +115,7 @@ public class PopularFragment extends Fragment {
                 }
             }
         });
-        fetchFromDataBase.execute("movie");
+        fetchFromDataBase.execute("movie" ,"movie");
     }
 
 
@@ -148,6 +151,12 @@ public class PopularFragment extends Fragment {
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                            SharedPreferences.Editor prefEditor = sharedPreferences.edit();
+                            prefEditor.putString(String.valueOf(R.string.sortingOrderKey),"favorit");
+                            prefEditor.commit();
+
+                            //String order =  sharedPreferences.getString(activity.getString(R.string.sortingOrderKey),activity.getString(R.string.sortingOrderdefault) );
                             order= "favorit";
                             getActivity().setTitle("Favorit");
                             fetchDataFromDB();

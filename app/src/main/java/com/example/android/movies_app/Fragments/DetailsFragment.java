@@ -1,6 +1,5 @@
 package com.example.android.movies_app.Fragments;
 
-
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -249,7 +248,7 @@ public class DetailsFragment extends Fragment {
                 if(movieReviewses.results.size()!=0)
                 {
                     setReviewsExpList (movieReviewses);
-                    setShareActionProvider ();
+                  //  setShareActionProvider ();
                 }
                 else
                     reviews_exp_list.setVisibility(View.GONE);
@@ -379,6 +378,8 @@ public class DetailsFragment extends Fragment {
             }
             if (returnUriMovie != null) {
                 addToFavoritButton.setText("Remove From Favorites");
+                addToFavoritButton.setBackgroundColor(Color.parseColor("#fc2e40"));
+                Toast.makeText(getActivity() ,"Added To Favorites" ,Toast.LENGTH_SHORT).show();
             }
         }
         else {
@@ -390,6 +391,10 @@ public class DetailsFragment extends Fragment {
                     MovieContract.MovieEntry.COLUMN_MOVIE_ID+" = ? ",new String[]{String.valueOf(movieContent.id)} );
             if(moviesDeleted!=0){
                 addToFavoritButton.setText("Add To Favorites");
+                addToFavoritButton.setBackgroundColor(Color.parseColor("#049e47"));
+                Toast.makeText(getActivity() ,"Removed From Favorites" ,Toast.LENGTH_SHORT).show();
+
+
             }
         }
 
