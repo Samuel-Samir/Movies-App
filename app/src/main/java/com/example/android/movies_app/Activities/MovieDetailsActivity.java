@@ -14,11 +14,20 @@ public class MovieDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
-        if(savedInstanceState==null)
-        {
-            getSupportFragmentManager().beginTransaction().add(R.id.activity_movie_details , new DetailsFragment()).commit();
+
+        //TODO Adding
+        if (savedInstanceState == null) {
+            // Create the detail fragment and add it to the activity
+            // using a fragment transaction.
+            Bundle arguments = new Bundle();
+            arguments.putSerializable("myMovie", getIntent().getSerializableExtra("myMovie"));
+            DetailsFragment fragment = new DetailsFragment();
+            fragment.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction().replace(R.id.activity_movie_details, fragment)
+                    .commit();
         }
     }
+
 
 
 }

@@ -20,10 +20,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.movies_app.Activities.MainActivity;
 import com.example.android.movies_app.Adapters.ExpandableListAdapter;
 import com.example.android.movies_app.Adapters.GridviewAdapter;
 import com.example.android.movies_app.Database.MovieContract;
@@ -55,8 +58,8 @@ public class DetailsFragment extends Fragment {
     private HashMap <String ,String> expandableListHashMap  ;
     private MenuItem menuItem ;
 
-    boolean ay7aga =true ;
-
+    LinearLayout linearLayout ;
+    ScrollView scrollView;
     ImageView posterImageView ;
     ImageView photoImageView ;
     TextView  nameTextView ;
@@ -77,29 +80,49 @@ public class DetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView=  inflater.inflate(R.layout.fragment_details, container, false);
-        movieContent = (MovieContent) getActivity().getIntent().getSerializableExtra("myMovie");
         getActivity().setTitle("Movie Details");
+        if (MainActivity.mTwoPane==true)
+        {
+
+            getActivity().setTitle(  Utilities.getOrderName(getActivity()));
+
+        }
         if (savedInstanceState==null)
         {
-            if (Utilities.getOrder(getActivity()).equals("favorit"))
+            Bundle arguments = getArguments();
+            if (arguments!=null)
+            {
+                movieContent =(MovieContent) arguments.getSerializable("myMovie");
+            }
+            else
+            {
+                movieContent = (MovieContent) getActivity().getIntent().getSerializableExtra("myMovie");
+
+            }
+
+
+            if (Utilities.getOrder(getActivity()).equals("favorit") && movieContent!=null)
             {
                 findViews(rootView);
                 setMovieContent();
                 fetchVideosFromDB ();
             }
             else
-            if (movieContent != null) {
-                findViews(rootView);
-                setMovieContent();
-                if (Utilities.checkInternetConnection(getActivity())) {
-                    fetchVideos();
-                } else
-                    Utilities.connectionAlart(getActivity());
+            {
+                if (movieContent != null) {
+                    findViews(rootView);
+                    setMovieContent();
+                    if (Utilities.checkInternetConnection(getActivity())) {
+                        fetchVideos();
+                    } else
+                        Utilities.connectionAlart(getActivity());
+                }
             }
         }
 
         else if (savedInstanceState!=null)
         {
+            movieContent = (MovieContent) savedInstanceState.getSerializable("myMovie") ;
             movieReviewses = (MovieReviewsList)  savedInstanceState.getSerializable("movieReviewses");
             movieVideoList = (MovieVideoList) savedInstanceState.getSerializable("movieVideoList") ;
             findViews(rootView);
@@ -110,6 +133,17 @@ public class DetailsFragment extends Fragment {
             if (movieReviewses.results.size()!=0)
                 setReviewsExpList (movieReviewses);
 
+        }
+
+        if(movieContent==null)
+        {
+            scrollView = (ScrollView) rootView.findViewById(R.id.scroll);
+
+            Resources res = getResources();
+            Drawable drawable = res.getDrawable(R.drawable.no_select);
+            scrollView.setBackground(drawable);
+            linearLayout = (LinearLayout) rootView.findViewById(R.id.no_selected);
+            linearLayout.setVisibility(LinearLayout.GONE);
         }
 
         return rootView ;
@@ -167,6 +201,7 @@ public class DetailsFragment extends Fragment {
     }
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putSerializable("myMovie" , movieContent);
         outState.putSerializable("movieReviewses" , movieReviewses);
         outState.putSerializable("movieVideoList" , movieVideoList);
 
@@ -320,7 +355,12 @@ public class DetailsFragment extends Fragment {
     }
     private Intent createShareForecastIntent() {
         String movieName = "Movie Name : " + movieContent.original_title  ;
-        String key = movieVideoList.results.get(0).key;
+        String key="";
+        if (movieVideoList.results.size()>=0)
+        {
+             key = movieVideoList.results.get(0).key;
+
+        }
         String url = "https://www.youtube.com/watch?v="+ key;
         String sharedString = "#Movie_App \n"+movieName+"\nMovie Official Trailers : "+url+"\n" ;
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -330,10 +370,6 @@ public class DetailsFragment extends Fragment {
         return shareIntent;
     }
 
-    public  void  test ()
-    {
-        Toast.makeText(getActivity() , String.valueOf(movieReviewses.results.size() ) , Toast.LENGTH_SHORT).show();
-    }
 
 
     public void onFavoriteClick()

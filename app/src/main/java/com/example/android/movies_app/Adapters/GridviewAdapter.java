@@ -45,9 +45,10 @@ public class GridviewAdapter extends  RecyclerView.Adapter<GridviewAdapter.ViewH
         Picasso.with(myActivity).load(baseimagUrl+imagUrl).placeholder(R.drawable.holder).into( holder.imageView) ;
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                ((Callback)myActivity).onMovieSelected(movieContent);
 
-                Intent intent = new Intent(myActivity, MovieDetailsActivity.class).putExtra("myMovie" ,movieContent);
-                myActivity.startActivity(intent);
+//                Intent intent = new Intent(myActivity, MovieDetailsActivity.class).putExtra("myMovie" ,movieContent);
+//                myActivity.startActivity(intent);
             }
         });
     }
@@ -66,4 +67,9 @@ public class GridviewAdapter extends  RecyclerView.Adapter<GridviewAdapter.ViewH
            imageView = (ImageView) itemView.findViewById(R.id.image_item);
        }
    }
+
+
+    public interface Callback{
+        void onMovieSelected(MovieContent movie);
+    }
 }

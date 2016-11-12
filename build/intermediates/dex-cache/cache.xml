@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="a0c8086015158e59ae8f57cbcb1490f36f2f581e">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_d11b7c8a38b472682f127ff02d6ac243c627d959\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_209f172466f5a387c8b086c932ef1f07eb363e57\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_b7ce793c1d1a7658a8072a58816953bebf01a4ce\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\picasso-2.5.2_64e22a29d8848113569da1b1754b5ab5a5e442ca\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_258cfed318a9960dd7992efdcfb99682ba9609e2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_171e71e614ae48ffbca5692233e2c75006c53719\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.github.paolorotolo\appintro\4.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="461cd433c2723981c7536d60acfcf3d86f3105fb">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.github.paolorotolo-appintro-4.1.0_383e4bdf952ab4f5e85975c201aaa46da5de8ebc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.1_1365cda9320b7e565093e58e5b828101f190f058\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_70515da169f32e150ad19c6de8609384f57a2915\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.1_d084cd359ff2aa85863fe2dc59fe5210e0e6372e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_32374044835764fe18bb6bc1a0632e19ff01b509\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.6.2\f1bc476cc167b18e66c297df599b2377131a8947\gson-2.6.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="f1bc476cc167b18e66c297df599b2377131a8947">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.6.2_df62ebcec641086472f9361f70d6374e67fbe282\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_66e09e63adfdeb337c81693bbde121b69ff6df9b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_1227c5d81886eec96c25bd78629fa9cc55266f0b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_4953b57e1837c3e642c63f98d9b55ba8a0979a71\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.1\support-annotations-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.1_ac9ee482f0e0891651c1993adc5556717d1582f5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_dba4e972ad3602a7484e69b002ed95bf5463ed55\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_76426e08c8154c7b06597242ab2be835830c078b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_7607d5258cda75bcb94317a8bcbb80345faead57\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_8e21fd55d910be72e07128de24214724c3876f2e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="3380790d4eb4d8165496358ff592a4815fc3a165">
+        <dex dex="C:\Users\samuel\AndroidStudioProjects\Udacity\Movies-App\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_4c66273334d64aae4c8240fccfb2f976196120ea\classes.dex" />
+    </item>
+
+</items>
