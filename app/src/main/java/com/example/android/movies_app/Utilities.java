@@ -40,6 +40,7 @@ public class Utilities {
     {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         String order =  sharedPreferences.getString(activity.getString(R.string.sortingOrderKey),activity.getString(R.string.sortingOrderdefault) );
+
         return order ;
     }
 

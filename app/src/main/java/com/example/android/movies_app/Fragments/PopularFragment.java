@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,8 @@ import com.example.android.movies_app.Models.MoviesList;
 import com.example.android.movies_app.R;
 import com.example.android.movies_app.Utilities;
 
+import java.util.Locale;
+
 
 public class PopularFragment extends Fragment {
 
@@ -35,7 +38,7 @@ public class PopularFragment extends Fragment {
     private GridviewAdapter myAdapter ;
     private RelativeLayout relativeLayout ;
     private MoviesList moviesList = new MoviesList() ;
-    private  String order;
+    public static   String order;
     private static final int PICK_WIFI_REQUEST = 1;
 
 
@@ -61,6 +64,7 @@ public class PopularFragment extends Fragment {
 
 
     public void onOrientationChange(int orientation){
+        //Check orientation and set recyclerview
         if(orientation == Configuration.ORIENTATION_PORTRAIT){
 
             moviesGrid.setLayoutManager(new GridLayoutManager(getActivity(),2 ));
@@ -106,7 +110,7 @@ public class PopularFragment extends Fragment {
                 onOrientationChange(getResources().getConfiguration().orientation);
                 myAdapter = new GridviewAdapter(getActivity(), moviesList);
                 moviesGrid.setAdapter(myAdapter);
-
+                // Set no Favorite in case of the movies list are empty
                 if (moviesList.results.size()==0)
                 {
                     Resources res = getResources();
@@ -130,6 +134,7 @@ public class PopularFragment extends Fragment {
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void checkConnection() {
+        // if there is internet connection than fetch data
         if (Utilities.checkInternetConnection(getActivity()))
         {
             fetchData();
@@ -151,12 +156,6 @@ public class PopularFragment extends Fragment {
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                            SharedPreferences.Editor prefEditor = sharedPreferences.edit();
-                            prefEditor.putString(String.valueOf(R.string.sortingOrderKey),"favorit");
-                            prefEditor.commit();
-
-                            //String order =  sharedPreferences.getString(activity.getString(R.string.sortingOrderKey),activity.getString(R.string.sortingOrderdefault) );
                             order= "favorit";
                             getActivity().setTitle("Favorit");
                             fetchDataFromDB();
@@ -169,6 +168,7 @@ public class PopularFragment extends Fragment {
 
 
     @Override
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 

@@ -48,7 +48,6 @@ public class ExpandableListAdapter
 
     @Override
     public long getChildId(int parent, int child) {
-        // TODO Auto-generated method stub
         return child;
     }
 
@@ -91,25 +90,21 @@ public class ExpandableListAdapter
 
     @Override
     public Object getGroup(int arg0) {
-        // TODO Auto-generated method stub
         return Movies_List.get(arg0);
     }
 
     @Override
     public int getGroupCount() {
-        // TODO Auto-generated method stub
         return Movies_List.size();
     }
 
     @Override
     public long getGroupId(int arg0) {
-        // TODO Auto-generated method stub
         return arg0;
     }
 
     @Override
     public View getGroupView(int parent, boolean isExpanded, View convertview, ViewGroup parentview) {
-        // TODO Auto-generated method stub
         String group_title = (String) getGroup(parent);
         if(convertview == null)
         {
@@ -125,13 +120,11 @@ public class ExpandableListAdapter
 
     @Override
     public boolean hasStableIds() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isChildSelectable(int arg0, int arg1) {
-        // TODO Auto-generated method stub
         return false;
     }
 

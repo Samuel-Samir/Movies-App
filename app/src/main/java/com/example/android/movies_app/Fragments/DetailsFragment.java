@@ -83,7 +83,7 @@ public class DetailsFragment extends Fragment {
         getActivity().setTitle("Movie Details");
         if (MainActivity.mTwoPane==true)
         {
-
+            // if im use tablet ui than  set title equals to  order
             getActivity().setTitle(  Utilities.getOrderName(getActivity()));
 
         }
@@ -101,7 +101,7 @@ public class DetailsFragment extends Fragment {
             }
 
 
-            if (Utilities.getOrder(getActivity()).equals("favorit") && movieContent!=null)
+            if (PopularFragment.order.equals("favorit") && movieContent!=null)
             {
                 findViews(rootView);
                 setMovieContent();

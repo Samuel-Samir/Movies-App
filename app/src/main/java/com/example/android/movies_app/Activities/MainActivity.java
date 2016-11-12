@@ -71,27 +71,7 @@ public class MainActivity extends AppCompatActivity implements GridviewAdapter.C
         return super.onOptionsItemSelected(item);
     }
 
-//    public void onResume(){
-//        super.onResume();
-//        String sort = Utilities.getOrder(this);
-//
-//        if (sort != null && !sort.equals(mSortMethod)) {
-//            PopularFragment mainFragment = (PopularFragment) getSupportFragmentManager().findFragmentById(R.id.main_Activity_Fragment);
-//            if ( mainFragment != null ) {
-//               // mainFragment.updateData(sort);
-//
-//            }
-//            DetailsFragment detailFragment = (DetailsFragment) getSupportFragmentManager().findFragmentByTag(DETAIL_FRAGMENT_TAG);
-//            if ( detailFragment != null) {
-//                getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.main_Activity_Fragment, new DetailsFragment() ,DETAIL_FRAGMENT_TAG).
-//                        commit();
-//            }
-//
-//            mSortMethod = sort;
-//        }
-//
-//    }
+
 
     @Override
     public void onBackPressed() {
